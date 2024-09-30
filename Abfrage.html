@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanitäter rufen</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container vh-100 containerAnfrage">
+        <div class="row h-100  justify-content-center  align-items-center">
+            <div class="col-6 ">
+                <h1>Neue Anfrage</h1>
+                <form>
+                    <div class="mb-3">
+                        <label for="loc">Standort</label>
+                        <select name="Standorte" id="loc">
+                            <option value="">Auswählen...</option>
+                            <option value="Haspel">Haspel</option>
+                            <option value="Kothen">Kothen</option>
+                        </select>
+                        <br>
+                        <br>
+                        <label for="san">Anzahl Sanitäter</label>
+                        <select name="Sanitäter" id="san">
+                            <option value="">Auswählen...</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5+</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="froom">Raumnummer</label>
+                        <input type="text" id="froom" placeholder="Raumnummer eintragen" >
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="fpriolabel" for="fprio">Priorität</label>
+                        <input type="checkbox" name="highpriority" id="fprio">
+                    </div>
+                    <div id="Fehler">
+                        
+                    </div>
+                    
+                    <button type="submit" id="sendSubmit" class="btn btn-primary">Absenden</button>
+                    
+                </form>
+            </div>
+        </div>
+    </div>    
+    
+    <script>        
+        const buttonNormal = document.getElementById('bnormal');
+        const buttonHoch = document.getElementById('bhoch');
+        const sanitäter = document.getElementById('san');
+        const standort = document.getElementById('loc');
+        const fehler = document.getElementById('Fehler');
+        const submit = document.getElementById('sendSubmit')
+
+        
+
+        buttonNormal.addEventListener('click',(e)=>{
+            e.preventDefault();
+            buttonNormal.style.backgroundColor = "#ffc107"
+            buttonHoch.style.backgroundColor = "gray";
+        });
+
+        buttonHoch.addEventListener('click',(e)=>{
+            e.preventDefault();
+            buttonHoch.style.backgroundColor = "#dc3545";
+            buttonNormal.style.backgroundColor = "gray";
+            
+        });
+
+        submit.addEventListener('click',(e)=>{
+            e.preventDefault();
+            console.log("click");
+            check();
+        });
+
+        function check() {
+            console.log("check");
+            if(!standort.value){
+            fehler.innerHTML = "Bitte einen Werte für den Standort eingeben."
+            }
+
+            if(!sanitäter.value){
+                fehler.innerHTML += "Bitte auswählen, wie viele Sanitäter benötigt werden."
+            }
+        }
+
+    </script>    
+</body>
+
+</html>

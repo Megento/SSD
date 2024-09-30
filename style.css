@@ -1,0 +1,103 @@
+body{
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.containerAnfrage{
+    background-color: antiquewhite;
+    width: 70%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formSend{
+    margin: auto auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.myForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    gap: 1rem;
+}
+
+.header {
+
+}
+
+.input-group {
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+}
+
+.input-group button[type="submit"] {
+    border: 0;
+    outline: 0;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.input-wrap {
+    position: relative;
+    margin-top: .5rem;
+}
+
+.input-wrap label {
+    position: absolute;
+    top: -1.3rem;
+    left: 0;
+    font-weight: 600;
+    font-size: .8rem;
+}
+
+.input-wrap input {
+    border: 0;
+    outline: 0;
+    border-radius: 8px;
+    padding: .2rem .5rem;
+}
+
+.input-wrap input:focus {
+
+}
+
+#fnotes {
+    width: 40vw;
+    height: 100px;
+}
+
+.fpriolabel {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+.fpriolabel:hover {
+    cursor: pointer;
+}
+
+#Fehler{
+    color: red;
+    font-weight: 600;
+}
+
+#sendSubmit{
+    margin-top: 1rem;
+}
+
+#headSend{
+    margin-bottom: 1rem;
+}
