@@ -46,7 +46,11 @@ body{
 .input-group button[type="submit"] {
     border: 0;
     outline: 0;
+    margin-top: 0.65rem;
+    height:1.6rem;
     border-radius: 8px;
+    border-bottom-left-radius: 8px !important;
+    border-top-left-radius: 8px !important;
     background-color: white;
 }
 
@@ -92,6 +96,7 @@ body{
 #Fehler{
     color: red;
     font-weight: 600;
+    white-space: pre-line;
 }
 
 #sendSubmit{
@@ -99,5 +104,11 @@ body{
 }
 
 #headSend{
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.error {
+    border: 2px solid red;
+    padding: 5px;
+    border-radius: 5px;
 }
