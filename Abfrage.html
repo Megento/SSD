@@ -10,35 +10,38 @@
 <body>
     <div class="container vh-100 containerAnfrage">
         <div class="row h-100  justify-content-center  align-items-center">
-            <div class="col-6 ">
+            <div class="col-12 ">
                 <h1>Neue Anfrage</h1>
                 <form>
                     <div class="mb-3">
-                        <label for="loc">Standort</label>
-                        <select name="Standorte" id="loc">
-                            <option value="">Auswählen...</option>
-                            <option value="Haspel">Haspel</option>
-                            <option value="Kothen">Kothen</option>
-                        </select>
+                        <div id="loc-div">
+                            <select class="form-select" name="Standorte" id="loc">
+                                <option value="">Standort*</option>
+                                <option value="Haspel">Haspel</option>
+                                <option value="Kothen">Kothen</option>
+                            </select>
+                        </div>
                         <br>
+                        <div class="form-floating" id="room-div">
+                            <input id="input" class="form-control" type="text" id="froom" placeholder="Raumnummer eintragen">
+                            <label id="labelRoomnumber" style="color: red;" for="froom">Raumnummer*</label>
+                        </div>
                         <br>
-                        <label for="san">Anzahl Sanitäter</label>
-                        <select name="Sanitäter" id="san">
-                            <option value="">Auswählen...</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5+</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="froom">Raumnummer</label>
-                        <input type="text" id="froom" placeholder="Raumnummer eintragen" >
+                        <div id="sani-div">
+                            <select class="form-select" name="Sanitäter" id="san">
+                                <option value="">Anzahl Sanitäter <span style="color:red !important;">*</span></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5+</option>
+                            </select>
+                        </div>
                     </div>
                     
+                    
                     <div class="mb-3">
-                        <label class="fpriolabel" for="fprio">Priorität</label>
+                        <label class="fpriolabel" for="fprio">Alle Teams rufen?</label>
                         <input type="checkbox" name="highpriority" id="fprio">
                     </div>
                     <div id="Fehler">
@@ -53,46 +56,120 @@
     </div>    
     
     <script>        
-        const buttonNormal = document.getElementById('bnormal');
-        const buttonHoch = document.getElementById('bhoch');
+        const room = document.getElementById('froom');
         const sanitäter = document.getElementById('san');
         const standort = document.getElementById('loc');
         const fehler = document.getElementById('Fehler');
         const submit = document.getElementById('sendSubmit')
+        const saniDiv = document.getElementById('sani-div');
+        const locationDiv = document.getElementById('loc-div');
+        const roomDiv = document.getElementById('room-div');
+        const roomNumber = document.getElementById('labelRoomnumber')
+        addColor(san);
+        addColor(loc);
+        san.addEventListener("change", function() {
+            console.log("ASDF");
+            addColor(san);
 
-        
+        })
+        loc.addEventListener("change",function() {
+            console.log("ASDF");
+            addColor(loc);
+        })
+        labelRoomnumber.addEventListener("input",changeColor)
 
-        buttonNormal.addEventListener('click',(e)=>{
-            e.preventDefault();
-            buttonNormal.style.backgroundColor = "#ffc107"
-            buttonHoch.style.backgroundColor = "gray";
-        });
+        function changeColor(e){
+            e.style.color("black")
+            if(labelRoomnumber.value){
+                labelRoomnumber.style.color("black");
+            }else{
+                labelRoomnumber.style.color("red");
+            }
+        }
+        function addColor(select) {
 
-        buttonHoch.addEventListener('click',(e)=>{
-            e.preventDefault();
-            buttonHoch.style.backgroundColor = "#dc3545";
-            buttonNormal.style.backgroundColor = "gray";
-            
-        });
+            var val1 = select.options[select.selectedIndex]
+            console.log(select.selectedIndex);
+                
+            if(val1.value ==="") {
+                console.log("IF");
+                select.style=" color: red;";
+                for (let i = 0; i < select.options.length; i++) {
+                const option = select.options[i];
+                
+                if(!option.value) {
+                    console.log("IF");
+                    option.style = "color: red;";
+                } else {
+                    console.log("ELSE");
+                    option.style = "color: black;";
+                }
+            }
+                val1.style = "color: red;";
+            } else {
+                console.log("ELSE");
+                select.style = "color: black;";
+                val1.style = "color: black;";
+            }
+        };
+        function Acolor(){
+            for (let i = 0; i < select.options.length; i++) {
+                const option = select.options[i];
+                
+                if(!option.value) {
+                    console.log("IF");
+                    option.style = "color: red;";
+                } else {
+                    console.log("ELSE");
+                    option.style = "color: black;";
+                }
+            }
+        }
 
         submit.addEventListener('click',(e)=>{
             e.preventDefault();
             console.log("click");
-            check();
+            fehler.innerHTML = "";
+            if (!errors_found()) {
+                window.location.href="Versendet.html";
+            }
         });
 
-        function check() {
-            console.log("check");
-            if(!standort.value){
-            fehler.innerHTML = "Bitte einen Werte für den Standort eingeben."
-            }
+        function validateRoomNumber(room) {
+            // Haspel: R, Kothen: K, Ritterstraße: Z
+        };
+        function errors_found() {
+            // clear all error classes before adding them
+            locationDiv.classList.remove("error");
+            saniDiv.classList.remove("error");
+            roomDiv.classList.remove("error");
 
-            if(!sanitäter.value){
-                fehler.innerHTML += "Bitte auswählen, wie viele Sanitäter benötigt werden."
+            let isError = false;
+            if(!standort.value){
+                locationDiv.classList.add("error");
+                fehler.innerHTML = "- Bitte Standort auswählen. \n";
+                isError = true;
             }
+            if(!sanitäter.value){
+                saniDiv.classList.add("error");
+                fehler.innerHTML += "- Bitte Sanitäteranzahl auswählen. \n";
+                isError = true;
+            }
+            if(!room.value){
+                roomDiv.classList.add("error");
+                fehler.innerHTML += "- Bitte Raum auswählen.";
+                isError = true;
+            }
+            if(isError) {
+                fehler.prepend("Bitte beheben Sie folgende Fehler: \n");
+            }
+            return isError;
         }
 
-    </script>    
+        
+    </script>   
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 
 </html>
